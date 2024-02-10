@@ -1,0 +1,22 @@
+//   - This file is part of GwardaApp Extension
+//  <https://github.com/gerwld/GwardaApp-extension/blob/main/README.md>,
+//   - Copyright (C) 2023-present GwardaApp Extension
+//   -
+//   - GwardaApp Extension is a software: you can redistribute it, but you are not allowed to modify it under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) License.
+//   -
+//   - GwardaApp Extension is distributed in the hope that it will be useful,
+//   - but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   - Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) License for more details.
+//   -
+//   - You should have received a copy of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) License
+//   - along with GwardaApp Extension.  If not, see <https://creativecommons.org/licenses/by-nc-nd/4.0/>.
+
+// Note: Amazon is a registered trademark of Amazon and all related Marks are Trademarks of Amazon.com, Inc. or its affiliates. This extension is not affiliated with or endorsed by Amazon.com, Inc or / and its affiliates.
+
+(()=>{"use strict";document.addEventListener("DOMContentLoaded",()=>{const a=document.getElementById("keywords__form"),m={CA:{id:"A2EUQ1WTGCTBG2",site:"amazon.ca"},US:{id:"ATVPDKIKX0DER",site:"amazon.com"},MX:{id:"A1AM78C64UM0Y8",site:"amazon.com.mx"},ES:{id:"A1RKKUPIHCS9HS",site:"amazon.es"},UK:{id:"A1F83G8C2ARO7P",site:"amazon.co.uk"},FR:{id:"A13V1IB3VIYZZH",site:"amazon.fr"},BE:{id:"AMEN7PMS3EDWL",site:"amazon.be"},NL:{id:"A1805IZSGTT6HS",site:"amazon.nl"},DE:{id:"A1PA6795UKMFR9",site:"amazon.de"},IT:{id:"APJ6JRA9NG5V4",site:"amazon.it"},SE:{id:"A2NODRKZP88ZB9",site:"amazon.se"},ZA:{id:"AE08WJ6YKNBMC",site:"amazon.co.za"},PL:{id:"A1C3SOZRARQ6R3",site:"amazon.pl"},EG:{id:"ARBP9OOSHTCHU",site:"amazon.eg"},TR:{id:"A33AVAJ2PDY3EV",site:"amazon.com.tr"},SA:{id:"A17E79C6D8DWNP",site:"amazon.sa"},AE:{id:"A2VIGQ35RCS4UG",site:"amazon.ae"},IN:{id:"A21TJRUUN4KGV",site:"amazon.in"},SG:{id:"A19VAU5U5O7RUS",site:"amazon.sg"},AU:{id:"A39IBJ37TRP1C6",site:"amazon.com.au"},JP:{id:"A1VC38T7YXB528",site:"amazon.co.jp"}};let o,c=0,r=!1,d=[];{const t=Object.fromEntries(new URLSearchParams(window.location.search).entries());var e;t.k&&(a.querySelector('[name="prefix"]').value=t.k),t.mp&&(e=Object.entries(m).find(([,e])=>e.site.includes(t.mp)))&&(a.querySelector('[name="marketplace"]').value=e[0],a.querySelector('[name="marketplace"]').dispatchEvent(new Event("change")),t.k)&&l({...t,mp:e[0]},!0)}function l(e,t){let s;var n=new FormData(a);if(t)s={...Object.fromEntries([...n.entries()]),prefix:e.k,marketplace:e.mp};else{if(e.preventDefault(),r)return;s=Object.fromEntries([...n.entries()])}const i=s.prefix.trim();t=s.marketplace;i?t&&"_"!==t?(u(),r=!0,c++,d=[],e=1===c?0:300,clearTimeout(o),o=setTimeout(()=>{{var t=s,n=i,a=m[t.marketplace].id,t=`https://completion.${m[t.marketplace].site}/api/2017/suggestions?mid=${encodeURIComponent(a)}&alias=${encodeURIComponent("aps")}&client-info=${encodeURIComponent("gwarda-amazon-research")}&prefix=`+encodeURIComponent(n);let e;const o=++c;fetch(t).then(e=>e.json()).then(e=>{if(n===A.value.trim()&&c===o){d=d.concat(e.suggestions);{var t=d,a=e.prefix;const s=document.getElementById("kwres_content"),i=(s.innerHTML="",new Set);t.forEach((e,t)=>{var n;e.value&&!i.has(e.value)&&(i.add(e.value),(n=document.createElement("div")).classList.add("kwres__item"),n.innerHTML=`
+            <span class="kwres__count">${t+1}</span>
+            <span class="kwres__count">${e.value}</span>
+            <span class="kwres__count">${a||"-"}</span>
+            <span class="kwres__count">${t||"0"}</span>
+          `,s.appendChild(n))})}}}).catch(e=>{}).finally(()=>{e&&(clearTimeout(e),e=setTimeout(()=>{l(new Event("submit"))},100)),c===o&&(r=!1)})}},e)):p("Marketplace cannot be empty"):p("Keyword cannot be empty")}function p(e){var t=document.getElementById("error-message");t.textContent=e,t.style.display="block"}function u(){var e=document.getElementById("error-message");e.textContent="",e.style.display="none"}const A=document.getElementsByName("prefix")[0];A.addEventListener("input",u),document.getElementsByName("marketplace")[0].addEventListener("change",u),a.addEventListener("submit",l,!1)})})();
